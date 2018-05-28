@@ -1,7 +1,7 @@
 import React from 'react';
 import './TodoItem.css';
 
-export default function TodoItem({ name, completed }) {
+export default function TodoItem({ name, completed, onDelete }) {
     return (
         <li
             className="task"
@@ -10,6 +10,7 @@ export default function TodoItem({ name, completed }) {
             }}
         >
             {name}
+            <span onClick={onDelete}> X </span>
         </li>
     );
 }

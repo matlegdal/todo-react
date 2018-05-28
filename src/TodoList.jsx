@@ -61,11 +61,33 @@ export default class TodoList extends Component {
         }).catch(err => console.log(err));
     }
 
+    deleteTodo(id) {
+        fetch(`${API_URL}${id}`, {
+            method: 'delete',
+        }).then(res => {
+            if (!res.ok) {
+                if (res.status >= 400 && res.status < 500) {
+                    return res.json().then(data => {
+                        let err = { errorMessage: data.message };
+                        throw err;
+                    });
+                } else {
+                    let err = { errorMessage: 'Please try again later. Server error.' };
+                    throw err;
+                }
+            }
+        }).then(() => {
+            const todos = this.state.todos.filter(todo => todo._id !== id);
+            this.setState({ todos });
+        }).catch(err => console.log(err));
+    }
+
     render() {
         const todos = this.state.todos.map((todo) => (
             <TodoItem
                 key={todo._id}
                 {...todo}
+                onDelete={this.deleteTodo.bind(this, todo._id)}
             />
         ));
         return (
