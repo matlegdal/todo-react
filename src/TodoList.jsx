@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TodoForm from './TodoForm';
 import TodoItem from './TodoItem';
+import './TodoList.css';
 const API_URL = '/api/todos/';
 
 export default class TodoList extends Component {
@@ -69,9 +70,14 @@ export default class TodoList extends Component {
         ));
         return (
             <div>
-                <h1>Todo List</h1>
+                <header>
+                    <h1>todo <span>list</span></h1>
+                    <h2>A simple todo list app built with React</h2>
+                </header>
+
                 <TodoForm addTodo={this.addTodo} />
-                <ul>
+
+                <ul id="todo-list" className="list">
                     {todos}
                 </ul>
             </div>

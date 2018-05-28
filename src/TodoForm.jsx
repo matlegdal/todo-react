@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './TodoForm.css';
 
 export default class TodoForm extends Component {
     constructor(props) {
@@ -21,16 +22,18 @@ export default class TodoForm extends Component {
 
     render() {
         return (
-            <div>
+            <section className="form">
                 <input
+                    id="todoInput"
                     type="text"
                     value={this.state.inputValue}
                     onChange={this.handleChange}
+                    placeholder="Insert your task here..."
                 />
                 <button onClick={this.handleSubmit}>
                     Add todo
                 </button>
-            </div>
+            </section>
         );
     }
 }
