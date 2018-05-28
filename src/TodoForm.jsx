@@ -15,9 +15,11 @@ export default class TodoForm extends Component {
         });
     }
 
-    handleSubmit() {
-        this.props.addTodo(this.state.inputValue);
-        this.setState({ inputValue: '' });
+    handleSubmit(e) {
+        if (e.key === 'Enter' && e.target.value !== '') {
+            this.props.addTodo(this.state.inputValue);
+            this.setState({ inputValue: '' });
+        }
     }
 
     render() {
@@ -28,11 +30,12 @@ export default class TodoForm extends Component {
                     type="text"
                     value={this.state.inputValue}
                     onChange={this.handleChange}
+                    onKeyDown={this.handleSubmit}
                     placeholder="Insert your task here..."
                 />
-                <button onClick={this.handleSubmit}>
+                {/* <button onClick={this.handleSubmit}>
                     Add todo
-                </button>
+                </button> */}
             </section>
         );
     }

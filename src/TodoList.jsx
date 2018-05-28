@@ -34,22 +34,25 @@ export default class TodoList extends Component {
     }
 
     async toggleTodo(todo) {
-        let updatedTodo = await api.updateTodo(todo)
-        const todos = this.state.todos.map(todo => {
-            return todo._id === updatedTodo._id ? { ...todo, completed: !todo.completed } : todo;
-        })
-        this.setState({ todos });
+        try {
+            let updatedTodo = await api.updateTodo(todo)
+            const todos = this.state.todos.map(todo => {
+                return todo._id === updatedTodo._id ? { ...todo, completed: !todo.completed } : todo;
+            })
+            this.setState({ todos });
+        } catch(err) {   
+        } 
     }
 
     render() {
-        const todos = this.state.todos.map((todo) => (
-            <TodoItem
+        const todos = this.state.todos.map((todo) => {
+            return <TodoItem
                 key={todo._id}
                 {...todo}
                 onDelete={this.deleteTodo.bind(this, todo._id)}
                 onToggle={this.toggleTodo.bind(this, todo)}
             />
-        ));
+        });
         return (
             <div>
                 <header>
