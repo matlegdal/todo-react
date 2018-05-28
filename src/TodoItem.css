@@ -23,13 +23,13 @@
     color: #bdc3c7;
 }
 
-li span {
+li span.delete {
     float: right;
     color: #c0392b;
     transition: all 0.3s;
     opacity: 0;
 }
 
-li span:hover {
+li span.delete:hover {
     color: #e74c3c
 }
